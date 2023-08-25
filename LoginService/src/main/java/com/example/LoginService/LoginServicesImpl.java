@@ -18,6 +18,6 @@ public class LoginServicesImpl implements LoginServices{
     @Override
     public int validateCredentials(String email, String password) {
 
-        return false;
+        return 0;
     }
 }

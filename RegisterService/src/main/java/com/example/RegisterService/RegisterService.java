@@ -23,8 +23,8 @@ public class RegisterService implements UserServices{
     }
 
     @Override
-    public String getUserByEmail(String email) {
-        if (userRepo.getUsersByEmail(email)>0){
+    public String ValidateUserByEmail(String email, String password) {
+        if (userRepo.ValidateUsersByEmail(email,password)>0){
             return "active user";
         }else {
             return "user not active";
@@ -33,8 +33,8 @@ public class RegisterService implements UserServices{
     }
 
     @Override
-    public String getUserByUsername(String username) {
-        if (userRepo.getUsersByName(username)>0){
+    public String ValidateUserByUsername(String username, String password) {
+        if (userRepo.ValidateUsersByName(username,password)>0){
             return "active user";
         }else {
             return "user not active";

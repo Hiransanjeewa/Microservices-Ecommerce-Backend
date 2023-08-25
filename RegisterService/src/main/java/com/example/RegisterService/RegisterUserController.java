@@ -12,10 +12,6 @@ import java.io.UnsupportedEncodingException;
 @RequestMapping("/ecommerce")
 public class RegisterUserController {
 
-
-
-
-
     @Autowired
     private  UserServices userServices;
 
@@ -26,6 +22,19 @@ public class RegisterUserController {
         return response;
     }
 
+    @PostMapping(path = "/loginwithusername")
+    public String ValidateUserWithUsername(@RequestBody String username,String password) throws UnsupportedEncodingException {
+//        System.out.println("Request received");
+        var response = userServices.ValidateUserByUsername(username, password);
+        return response;
+    }
+
+    @PostMapping(path = "/loginwithemail")
+    public String ValidateUserWithEmail(@RequestBody String email,String password) throws UnsupportedEncodingException {
+//        System.out.println("Request received");
+        var response = userServices.ValidateUserByEmail(email, password);
+        return response;
+    }
 
 
 }

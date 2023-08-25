@@ -2,6 +2,6 @@ package com.example.RegisterService;
 
 public interface UserServices {
     String addUser(Users users);
-    String getUserByEmail (String email);
-    String getUserByUsername (String username);
+    String ValidateUserByEmail (String email, String password);
+    String ValidateUserByUsername (String email, String password);
 }

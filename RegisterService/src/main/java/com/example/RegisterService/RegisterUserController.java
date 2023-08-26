@@ -14,18 +14,23 @@ import java.io.UnsupportedEncodingException;
 @RequestMapping("/ecommerce")
 public class RegisterUserController {
 
-    private static  final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
 
     @Autowired
     private  UserServices userServices;
 
+    Logger logger = LoggerFactory.getLogger(getClass());
+
 
 
     @PostMapping(path = "/register")
-    public String saveUser(@RequestBody Users users) throws UnsupportedEncodingException {
+    public  String saveUser(@RequestBody Users users) throws UnsupportedEncodingException {
         System.out.println("Request received");
-        Logger.info("creating user account : email={}",users.getEmail());
+       // String email=users.getEmail()
+
+        logger.info("creating user account: email={}", users.getEmail());
+
+//        Logger.info("creating user account : email={}",users.getEmail());
 
         var response = userServices.addUser(users);
         return response;
@@ -34,7 +39,8 @@ public class RegisterUserController {
     @PostMapping(path = "/loginwithusername")
     public String ValidateUserWithUsername(@RequestBody String username,String password) throws UnsupportedEncodingException {
 //        System.out.println("Request received");
-        Logger.info("validated login credentials : username={}",username);
+
+        logger.info("validated login credentials : username={}",username);
 
         var response = userServices.ValidateUserByUsername(username, password);
         return response;
@@ -43,7 +49,7 @@ public class RegisterUserController {
     @PostMapping(path = "/loginwithemail")
     public String ValidateUserWithEmail(@RequestBody String email,String password) throws UnsupportedEncodingException {
 //        System.out.println("Request received");
-        Logger.info("validated login credentials : email={}",email);
+        logger.info("validated login credentials : email={}",email);
 
         var response = userServices.ValidateUserByEmail(email, password);
         return response;

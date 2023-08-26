@@ -2,7 +2,16 @@
 
 
 
+
 spring:
+  jpa:
+    hibernate:
+        ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:8889/Microservices
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: register-service
   config:
@@ -11,11 +20,11 @@ spring:
 
 
 
-
+#
 #  spring.jpa.hibernate.ddl-auto=update
 #  spring.datasource.url=jdbc:mysql://localhost:8889/Microservices
 #  spring.datasource.username=root
 #  spring.datasource.password=root
 #  spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-#spring.jpa.show-sql: true
+#pring.jpa.show-sql: true
 

@@ -1,6 +1,14 @@
 
 
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:mysql://localhost:8889/Logins
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: login-service
   config:

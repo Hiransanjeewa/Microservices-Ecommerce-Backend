@@ -1,10 +1,7 @@
 package com.example.LoginService;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "logins")
@@ -18,6 +15,7 @@ public class logins {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "login_id",length = 5)
     private int id;
 
@@ -32,16 +30,16 @@ public class logins {
         this.user_id = user_id;
     }
 
-    public int getSession_token() {
+    public String getSession_token() {
         return session_token;
     }
 
-    public void setSession_token(int session_token) {
+    public void setSession_token(String session_token) {
         this.session_token = session_token;
     }
 
     @Column(name = "session_token",length = 5)
-    private int session_token;
+    private String session_token;
 
 
 

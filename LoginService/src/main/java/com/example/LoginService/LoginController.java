@@ -3,29 +3,31 @@ package com.example.LoginService;
 
 import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
+
 @RestController
 @RequestMapping("/ecommerce")
 public class LoginController {
 
-    private static  final logger LOGGER = ILoggerFactory.getLogger(LoginController.class);
+    Logger logger = LoggerFactory.getLogger(getClass());
 
 
-    @Autowired
-    LoginServices loginServices;
+
+    private  LoginServices loginServices;
 
 
 
     @PostMapping("/login")
-    public String loginWithCredentials(@RequestBody String email, String password){
+    public String loginWithCredentials(@RequestBody String email, String password) throws UnsupportedEncodingException {
 
-        Logger.info("validated login credentials : email={}",email);
-
+        logger.info("login user account: email={}", email);
 
         int validatedId = loginServices.validateCredentials(email,password);
         if ( validatedId !=0){
@@ -33,6 +35,9 @@ public class LoginController {
         }else {
             return "Email or password incorrect";
         }
+
+
+
     }
 
 

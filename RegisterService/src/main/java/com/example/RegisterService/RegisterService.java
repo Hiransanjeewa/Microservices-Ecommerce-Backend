@@ -23,21 +23,23 @@ public class RegisterService implements UserServices{
     }
 
     @Override
-    public String ValidateUserByEmail(String email, String password) {
-        if (userRepo.ValidateUsersByEmail(email,password)>0){
-            return "active user";
+    public int ValidateUserByEmail(String email, String password) {
+        int userid= userRepo.ValidateUsersByEmail(email,password);
+        if (userid>0){
+            return userid;
         }else {
-            return "user not active";
+            return 0;
         }
 
     }
 
     @Override
-    public String ValidateUserByUsername(String username, String password) {
-        if (userRepo.ValidateUsersByName(username,password)>0){
-            return "active user";
+    public int ValidateUserByUsername(String username, String password) {
+        int userid = userRepo.ValidateUsersByName(username,password);
+        if (userid>0){
+            return userid;
         }else {
-            return "user not active";
+            return 0;
         }
     }
 }

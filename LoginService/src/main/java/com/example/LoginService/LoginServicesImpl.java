@@ -14,8 +14,9 @@ public class LoginServicesImpl implements LoginServices{
     @Autowired
     private  LoginRepo loginRepo;
 
+
     @Autowired
-    private RegisterServiceClient registerServiceClient ;
+    private RegisterServiceClient registerServiceWebClient ;
 
     @Override
     public String createSessionId(int userid) {
@@ -38,6 +39,6 @@ public class LoginServicesImpl implements LoginServices{
     }
     @Override
     public int validateCredentials(LoginUser loginUser) throws UnsupportedEncodingException {
-        return registerServiceClient.ValidateUserWithEmail(loginUser);
+        return registerServiceWebClient.ValidateUserWithEmail(loginUser);
     }
 }

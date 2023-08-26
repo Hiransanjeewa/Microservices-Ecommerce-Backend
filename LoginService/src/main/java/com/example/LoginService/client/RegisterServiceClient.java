@@ -13,8 +13,9 @@ import java.io.UnsupportedEncodingException;
 
 @HttpExchange   // Declarative client
 public interface RegisterServiceClient {
-    @PostExchange("/ecommerce/loginwithusername")
-    public int ValidateUserWithUsername(@RequestBody String username, String password) throws UnsupportedEncodingException;
+
+//    @PostExchange("/ecommerce/loginwithusername")
+//    public int ValidateUserWithUsername(@RequestBody String username, String password) throws UnsupportedEncodingException;
 
     @PostExchange("/ecommerce/loginwithemail")
     public int ValidateUserWithEmail(@RequestBody LoginUser loginUser) throws UnsupportedEncodingException ;

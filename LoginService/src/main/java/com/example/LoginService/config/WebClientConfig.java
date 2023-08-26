@@ -10,26 +10,29 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
-@Configuration
-public class WebClientConfig {
 
-    @Autowired
-    private LoadBalancedExchangeFilterFunction filterFunction;
 
-    @Bean
-    public WebClient registerWebClient(){
-        return WebClient.builder()
-                .baseUrl("http://register-service")
-                .filter(filterFunction)
-                .build();
+    @Configuration
+    public class WebClientConfig {
+
+        @Autowired
+        private LoadBalancedExchangeFilterFunction filterFunction;
+
+
+        @Bean
+        public WebClient registerWebClient() {
+            return WebClient.builder()
+                    .baseUrl("http://register-service")
+                    .filter(filterFunction)
+                    .build();
+        }
+
+        @Bean
+        public RegisterServiceClient registerClient() {
+            HttpServiceProxyFactory httpServiceProxyFactory
+                    = HttpServiceProxyFactory
+                    .builder(WebClientAdapter.forClient(registerWebClient()))
+                    .build();
+            return httpServiceProxyFactory.createClient(RegisterServiceClient.class);
+        }
     }
-
-    @Bean
-    public RegisterServiceClient registerServiceClient(){
-         HttpServiceProxyFactory httpServiceProxyFactory
-               = HttpServiceProxyFactory
-                 .builder(WebClientAdapter.forClient(registerWebClient()))
-                 .build();
-         return httpServiceProxyFactory.createClient(RegisterServiceClient.class);
-    }
-}

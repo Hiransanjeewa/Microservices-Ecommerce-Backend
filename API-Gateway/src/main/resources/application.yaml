@@ -1,0 +1,31 @@
+server:
+  port: 8060
+
+eureka:
+  client:
+    service-url:
+      defaultzone: "http://localhost:8761/eureka"
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+spring:
+  application:
+    name: api-gateway
+  config:
+    import: "optional:configserver:http://localhost:8081"
+
+  cloud:
+    gateway:
+      routes:
+        - id: register-service
+          uri: lb://register-service
+          predicates:
+            - Path=/ecommerce/register/**
+
+        - id: login-service
+          uri: lb://login-service
+          predicates:
+            - Path=/login/**
+

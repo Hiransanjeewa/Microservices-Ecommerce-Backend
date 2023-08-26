@@ -1,6 +1,7 @@
 package com.example.LoginService;
 
 
+import com.example.LoginService.client.RegisterServiceClient;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,16 +21,20 @@ public class LoginController {
 
 
 
-    private  LoginServices loginServices;
 
+    LoginServices loginServices = new LoginServicesImpl();
 
+    @Autowired
+    private RegisterServiceClient registerServiceClient ;
 
     @PostMapping("/login")
-    public String loginWithCredentials(@RequestBody String email, String password) throws UnsupportedEncodingException {
+    public String loginWithCredentials(@RequestBody LoginUser loginuser) throws UnsupportedEncodingException {
 
-        logger.info("login user account: email={}", email);
 
-        int validatedId = loginServices.validateCredentials(email,password);
+
+        logger.info("login user account: email={}", loginuser.getEmail());
+
+        int validatedId = loginServices.validateCredentials(loginuser);
         if ( validatedId !=0){
             return loginServices.createSessionId(validatedId);
         }else {

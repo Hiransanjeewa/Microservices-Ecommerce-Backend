@@ -1,18 +1,21 @@
 package com.example.LoginService;
 
+
 import com.example.LoginService.client.RegisterServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
+@Service
 public class LoginServicesImpl implements LoginServices{
 
     @Autowired
-    LoginRepo loginRepo;
+    private  LoginRepo loginRepo;
 
     @Autowired
-    private RegisterServiceClient registerServiceClient;
+    private RegisterServiceClient registerServiceClient ;
 
     @Override
     public String createSessionId(int userid) {
@@ -34,8 +37,7 @@ public class LoginServicesImpl implements LoginServices{
         return sessionKey.toString();
     }
     @Override
-    public int validateCredentials(String email, String password) throws UnsupportedEncodingException {
-        int userid = registerServiceClient.ValidateUserWithEmail(email, password);
-        return userid;
+    public int validateCredentials(LoginUser loginUser) throws UnsupportedEncodingException {
+        return registerServiceClient.ValidateUserWithEmail(loginUser);
     }
 }

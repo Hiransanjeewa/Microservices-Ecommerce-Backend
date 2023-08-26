@@ -47,11 +47,11 @@ public class RegisterUserController {
     }
 
     @PostMapping(path = "/loginwithemail")
-    public int ValidateUserWithEmail(@RequestBody String email,String password) throws UnsupportedEncodingException {
+    public int ValidateUserWithEmail(@RequestBody User user) throws UnsupportedEncodingException {
 //        System.out.println("Request received");
-        logger.info("validated login credentials : email={}",email);
+        logger.info("validated login credentials : email={}",user.email);
 
-        var response = userServices.ValidateUserByEmail(email, password);
+        var response = userServices.ValidateUserByEmail(user.email, user.password);
         return response;
     }
 

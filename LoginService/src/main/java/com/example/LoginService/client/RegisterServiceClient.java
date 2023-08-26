@@ -1,6 +1,8 @@
 package com.example.LoginService.client;
 
 
+import com.example.LoginService.LoginUser;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.service.annotation.GetExchange;
@@ -15,7 +17,7 @@ public interface RegisterServiceClient {
     public int ValidateUserWithUsername(@RequestBody String username, String password) throws UnsupportedEncodingException;
 
     @PostExchange("/ecommerce/loginwithemail")
-    public int ValidateUserWithEmail(@RequestBody String email,String password) throws UnsupportedEncodingException ;
+    public int ValidateUserWithEmail(@RequestBody LoginUser loginUser) throws UnsupportedEncodingException ;
 
 
     }

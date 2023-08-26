@@ -5,9 +5,9 @@ spring:
     hibernate:
       ddl-auto: create
   datasource:
-    url: jdbc:mysql://localhost:8889/Logins
-    username: root
-    password: root
+    url: jdbc:mysql://microservices.cdcymup5vgpw.us-east-1.rds.amazonaws.com:3306/Logins
+    username: admin
+    password: hiran12345
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: login-service

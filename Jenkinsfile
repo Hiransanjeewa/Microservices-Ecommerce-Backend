@@ -33,24 +33,22 @@ pipeline {
       }
     }
 
-
-
-    // stage('Build and Push Docker Image') {
-    //   environment {
-    //     DOCKER_IMAGE = "hiransanjeewa/springboot_ci_cd:${BUILD_NUMBER}"
-    //     // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
-    //     REGISTRY_CREDENTIALS = credentials('Dockerhub-Credentials')
-    //   }
-    //   steps {
-    //     script {
-    //         sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
-    //         def dockerImage = docker.image("${DOCKER_IMAGE}")
-    //         docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
-    //             dockerImage.push()
-    //         }
-    //     }
-    //   }
-    // }
+    stage('Build and Push Docker Image') {
+      environment {
+        DOCKER_IMAGE = "hiransanjeewa/microservices-backend:config-server"
+        // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
+        REGISTRY_CREDENTIALS = credentials('Dockerhub-Credentials')
+      }
+      steps {
+        script {
+            sh 'cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
+            def dockerImage = docker.image("${DOCKER_IMAGE}")
+            docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
+                dockerImage.push()
+            }
+        }
+      }
+    }
     
     // stage('Update Deployment File') {
     //     environment {

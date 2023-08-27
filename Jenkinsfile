@@ -17,7 +17,8 @@ pipeline {
       steps {
         sh 'ls -ltr'
         // build the project and create a JAR file
-        sh 'cd Microservices-Ecommerce-Backend && mvn clean package'
+
+        sh 'cd ConfigServer && mvn clean package'
       }
     }
     stage('Static Code Analysis') {
@@ -26,7 +27,8 @@ pipeline {
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'cd Microservices-Ecommerce-Backend && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+          sh 'ls -ltr'
+          sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
       }
     }

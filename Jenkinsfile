@@ -20,18 +20,18 @@ pipeline {
 
         sh 'cd ConfigServer && mvn clean package'
       }
-    }
-    stage('Static Code Analysis') {
-      environment {
-        SONAR_URL = "http://34.133.164.237:9000"
-      }
-      steps {
-        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'ls -ltr'
-          sh 'cd ConfigServer && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-        }
-      }
-    }
+    // }
+    // stage('Static Code Analysis') {
+    //   environment {
+    //     SONAR_URL = "http://34.133.164.237:9000"
+    //   }
+    //   steps {
+    //     withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+    //       sh 'ls -ltr'
+    //       sh 'cd ConfigServer && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+    //     }
+    //   }
+    // }
 
     stage('Build and Push Docker Image') {
       environment {
@@ -41,11 +41,11 @@ pipeline {
       }
       steps {
         script {
-            // sh ' cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
-            // def dockerImage = docker.image("${DOCKER_IMAGE}")
+            sh ' cd ConfigServer && docker buildx build --platform linux/amd64 -t ${DOCKER_IMAGE} .'
+            def dockerImage = docker.image("${DOCKER_IMAGE}")
             docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
-                // dockerImage.push()
-             sh ' cd ConfigServer && mvn package dockerfile:push'
+                 dockerImage.push()
+            // sh ' cd ConfigServer && mvn package dockerfile:push'
             }
         }
       }

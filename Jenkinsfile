@@ -60,7 +60,7 @@ pipeline {
                 url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
                 branch: 'main'
             }
-        }
+    }
     
     stage('Update Deployment File') {
         environment {
@@ -71,11 +71,14 @@ pipeline {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
 
+                    
                     ls
                     pwd
+                    cd deployments
                     chmod +rwx config-server-service.yaml
                     sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml
                     cat config-server-service.yaml
+                    cd ../
                     git status
                     git add .
                     git commit -m 'config-server-service.yaml | Jenkins Pipeline'

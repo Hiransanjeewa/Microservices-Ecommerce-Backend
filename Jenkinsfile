@@ -53,6 +53,14 @@ pipeline {
     //     }
     //   }
     // }
+
+    stage('Checkout K8S manifest SCM') {
+        steps {
+            git credentialsId: 'github', 
+                url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
+                branch: 'main'
+            }
+        }
     
     stage('Update Deployment File') {
         environment {
@@ -65,6 +73,8 @@ pipeline {
 
                     ls
                     pwd
+                    cd ConfigServer
+
 
                    '''
             }
@@ -76,7 +86,7 @@ pipeline {
 
 }
 
-                    // cd manifests
+                   
                     // chmod +rwx deploy.yml
                     // sed -i "s/django:[0-9]*/django:${BUILD_NUMBER}/g" deploy.yml  
                     // cat deploy.yml

@@ -56,7 +56,7 @@ pipeline {
 
     stage('Checkout K8S manifest SCM') {
         steps {
-            git credentialsId: 'github', 
+            git credentialsId: 'Github-Credentials', 
                 url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
                 branch: 'main'
             }

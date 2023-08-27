@@ -43,7 +43,7 @@ pipeline {
       }
       steps {
         script {
-            sh ' cd ConfigServer && docker buildx build --platform linux/amd64 -t ${DOCKER_IMAGE} .'
+            sh ' cd ConfigServer && docker build --platform linux/amd64 -t ${DOCKER_IMAGE} .'
             def dockerImage = docker.image("${DOCKER_IMAGE}")
             docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
                  dockerImage.push()

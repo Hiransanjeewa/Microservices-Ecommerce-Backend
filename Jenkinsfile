@@ -15,43 +15,43 @@ pipeline {
         git branch: 'main', url: 'https://github.com/Hiransanjeewa/Microservices-Ecommerce-Backend.git'
       }
     }
-    // stage('Build and Test') {
-    //   steps {
-    //     sh 'ls -ltr'
-    //     // build the project and create a JAR file
+    stage('Build and Test') {
+      steps {
+        sh 'ls -ltr'
+        // build the project and create a JAR file
 
-    //     sh 'cd ConfigServer && mvn clean package'
-    //   }
-    //   }
-    // stage('Static Code Analysis') {
-    //   environment {
-    //     SONAR_URL = "http://34.133.164.237:9000"
-    //   }
-    //   steps {
-    //     withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-    //       sh 'ls -ltr'
-    //       sh 'cd ConfigServer && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-    //     }
-    //   }
-    // // }
+        sh 'cd ConfigServer && mvn clean package'
+      }
+      }
+    stage('Static Code Analysis') {
+      environment {
+        SONAR_URL = "http://34.133.164.237:9000"
+      }
+      steps {
+        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+          sh 'ls -ltr'
+          sh 'cd ConfigServer && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+        }
+      }
+     }
 
-    // stage('Build and Push Docker Image') {
-    //   environment {
-    //     DOCKER_IMAGE = "hiransanjeewa/config-server:${BUILD_NUMBER}"
-    //     // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
-    //     REGISTRY_CREDENTIALS = credentials('Dockerhub-Credentials')
-    //   }
-    //   steps {
-    //     script {
-    //         sh 'docker -v'
-    //         sh ' cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
-    //         def dockerImage = docker.image("${DOCKER_IMAGE}")
-    //         docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
-    //              dockerImage.push()
-    //         // sh ' cd ConfigServer && mvn package dockerfile:push'
-    //         }
-    //     }
-    //   }
+    stage('Build and Push Docker Image') {
+      environment {
+        DOCKER_IMAGE = "hiransanjeewa/config-server:${BUILD_NUMBER}"
+        // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
+        REGISTRY_CREDENTIALS = credentials('Dockerhub-Credentials')
+      }
+      steps {
+        script {
+            sh 'docker -v'
+            sh ' cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
+            def dockerImage = docker.image("${DOCKER_IMAGE}")
+            docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
+                 dockerImage.push()
+            // sh ' cd ConfigServer && mvn package dockerfile:push'
+            }
+        }
+      }
     // }
 
     stage('Checkout K8S manifest SCM') {

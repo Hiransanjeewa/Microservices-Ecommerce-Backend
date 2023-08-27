@@ -48,8 +48,10 @@ pipeline {
             def dockerImage = docker.image("${DOCKER_IMAGE}")
             docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
                  dockerImage.push()
-            // sh ' cd ConfigServer && mvn package dockerfile:push'
+            
+            
             }
+            sh 'mkdir deployment-manifests && cd deployment-manifests'
         }
       }
      }

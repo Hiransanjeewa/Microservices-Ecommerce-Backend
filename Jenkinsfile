@@ -33,48 +33,58 @@ pipeline {
     //       sh 'cd ConfigServer && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
     //     }
     //   }
-    // }
+    // // }
 
-    stage('Build and Push Docker Image') {
-      environment {
-        DOCKER_IMAGE = "hiransanjeewa/microservices-backend:config-server"
-        // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
-        REGISTRY_CREDENTIALS = credentials('Dockerhub-Credentials')
-      }
-      steps {
-        script {
-            sh 'docker -v'
-            sh ' cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
-            def dockerImage = docker.image("${DOCKER_IMAGE}")
-            docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
-                 dockerImage.push()
-            // sh ' cd ConfigServer && mvn package dockerfile:push'
-            }
-        }
-      }
-    }
-    
-    // stage('Update Deployment File') {
-    //     environment {
-    //         GIT_REPO_NAME = "Jenkins-Zero-To-Hero"
-    //         GIT_USER_NAME = "hiransanjeewa"
-    //     }
-    //     steps {
-    //         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-    //             sh '''
-    //                 git config user.email "abhishek.xyz@gmail.com"
-    //                 git config user.name "Abhishek Veeramalla"
-    //                 BUILD_NUMBER=${BUILD_NUMBER}
-    //                 sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
-    //                 git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
-    //                 git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-    //                 git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
-    //             '''
+    // stage('Build and Push Docker Image') {
+    //   environment {
+    //     DOCKER_IMAGE = "hiransanjeewa/microservices-backend:config-server"
+    //     // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
+    //     REGISTRY_CREDENTIALS = credentials('Dockerhub-Credentials')
+    //   }
+    //   steps {
+    //     script {
+    //         sh 'docker -v'
+    //         sh ' cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
+    //         def dockerImage = docker.image("${DOCKER_IMAGE}")
+    //         docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
+    //              dockerImage.push()
+    //         // sh ' cd ConfigServer && mvn package dockerfile:push'
     //         }
     //     }
+    //   }
     // }
+    
+    stage('Update Deployment File') {
+        environment {
+            GIT_REPO_NAME = "Microservices-Backend-Manifests"
+            GIT_USER_NAME = "Hiransanjeewa"
+        }
+        steps {
+            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                sh '''
+                    git config user.email "hiransanjeewaa@gmail.com"
+                    git config user.name "hiransanjeewa"
+                    ls
+                    pwd
+
+                   '''
+            }
+        }
+    }
   }
 
 
 
 }
+
+                    // cd manifests
+                    // chmod +rwx deploy.yml
+                    // sed -i "s/django:[0-9]*/django:${BUILD_NUMBER}/g" deploy.yml  
+                    // cat deploy.yml
+                    // cd ../
+                    // git status
+                    // git add .
+                    // git commit -m 'Updated the deploy yml | Jenkins Pipeline'
+                    // git remote -v
+                    // git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+  

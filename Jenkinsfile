@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'hiransanjeewa/springboot_ci_cd'
+      image 'hiransanjeewa/springboot_ci_cd:latest'
       args '-v /var/run/docker.sock:/var/run/docker.sock'
 
       // args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon

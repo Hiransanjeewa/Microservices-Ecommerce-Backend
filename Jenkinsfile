@@ -52,7 +52,7 @@ pipeline {
             }
         }
       }
-    // }
+     }
 
     stage('Checkout K8S manifest SCM') {
         steps {

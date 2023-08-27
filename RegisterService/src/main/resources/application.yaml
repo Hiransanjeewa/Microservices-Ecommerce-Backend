@@ -8,14 +8,25 @@ spring:
     hibernate:
         ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:8889/Microservices
-    username: root
-    password: root
+    url: jdbc:mysql://microservices.cdcymup5vgpw.us-east-1.rds.amazonaws.com:3306/Microservices
+    username: admin
+    password: hiran12345
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: register-service
   config:
     import: "optional:configserver:http://localhost:8081"
+
+
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: eureka-0
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
 
 
 

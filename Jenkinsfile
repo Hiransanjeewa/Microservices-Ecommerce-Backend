@@ -37,7 +37,7 @@ pipeline {
 
     // stage('Build and Push Docker Image') {
     //   environment {
-    //     DOCKER_IMAGE = "hiransanjeewa/microservices-backend:config-server"
+    //     DOCKER_IMAGE = "hiransanjeewa/config-server:${BUILD_NUMBER}"
     //     // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
     //     REGISTRY_CREDENTIALS = credentials('Dockerhub-Credentials')
     //   }
@@ -73,7 +73,9 @@ pipeline {
 
                     ls
                     pwd
-                    cd ConfigServer
+                    chmod +rwx config-server-service.yaml
+                    sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml
+                    cat config-server-service.yaml
 
 
                    '''
@@ -87,8 +89,8 @@ pipeline {
 }
 
                    
-                    // chmod +rwx deploy.yml
-                    // sed -i "s/django:[0-9]*/django:${BUILD_NUMBER}/g" deploy.yml  
+                    // 
+                    //  
                     // cat deploy.yml
                     // cd ../
                     // git status

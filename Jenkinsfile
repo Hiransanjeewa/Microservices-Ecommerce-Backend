@@ -20,7 +20,7 @@ pipeline {
 
         sh 'cd ConfigServer && mvn clean package'
       }
-    // }
+      }
     // stage('Static Code Analysis') {
     //   environment {
     //     SONAR_URL = "http://34.133.164.237:9000"

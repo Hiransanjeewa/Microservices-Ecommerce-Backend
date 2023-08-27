@@ -76,6 +76,11 @@ pipeline {
                     chmod +rwx config-server-service.yaml
                     sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml
                     cat config-server-service.yaml
+                    git add .
+                    git commit -m 'config-server-service.yaml | Jenkins Pipeline'
+                    git remote -v
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+
 
 
                    '''

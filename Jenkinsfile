@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'hiransanjeewa/springboot_microservices_base_image'
+      image 'maven:3.8.3-openjdk-17'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
@@ -41,11 +41,11 @@ pipeline {
       }
       steps {
         script {
-           
-            // sh 'cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
+            // sh ' cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
             // def dockerImage = docker.image("${DOCKER_IMAGE}")
             docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
-                 sh 'cd ConfigServer && mvn package dockerfile:push'
+                // dockerImage.push()
+             sh ' cd ConfigServer && mvn package dockerfile:push'
             }
         }
       }

@@ -13,6 +13,8 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo passed'
+        sh 'pwd'
+        sh 'ls'
         git branch: 'main', url: 'https://github.com/Hiransanjeewa/Microservices-Ecommerce-Backend.git'
       }
      }
@@ -22,6 +24,7 @@ pipeline {
          // build the project and create a JAR file
 
          sh 'cd ConfigServer && mvn clean package'
+         sh 'cd ../'
          sh 'ls'
          sh 'pwd'
 

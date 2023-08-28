@@ -25,7 +25,7 @@ pipeline {
          sh 'ls'
          sh 'pwd'
 
-         cleanWs()
+         
 
        }
        }

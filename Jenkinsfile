@@ -15,7 +15,7 @@ pipeline {
         sh 'echo passed'
         git branch: 'main', url: 'https://github.com/Hiransanjeewa/Microservices-Ecommerce-Backend.git'
       }
-    // }
+     }
     //  stage('Build and Test') {
     //    steps {
     //      sh 'ls -ltr'

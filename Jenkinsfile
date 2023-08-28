@@ -24,11 +24,8 @@ pipeline {
          sh 'cd ConfigServer && mvn clean package'
          sh 'ls'
          sh 'pwd'
-         sh '''
-           cd ../
-           rm -r Microservices-Backend
 
-         '''
+         cleanWs()
 
        }
        }

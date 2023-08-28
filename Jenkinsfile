@@ -102,7 +102,7 @@ pipeline {
                     cd ../
                     git config --global --add safe.directory /var/lib/jenkins/workspace/Microservices-Backend
                     git status
-                    git add .
+                    git add deployments
                     git commit -m 'config-server-service.yaml | Jenkins Pipeline'
                     git remote -v
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main

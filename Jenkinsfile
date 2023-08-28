@@ -51,7 +51,7 @@ pipeline {
             
             
             }
-            sh 'rm -r deployment-manifests'
+          
             sh 'mkdir deployment-manifests && cd deployment-manifests'
         }
       }

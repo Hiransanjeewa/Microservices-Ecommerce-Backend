@@ -36,36 +36,46 @@ pipeline {
        }
       }
 
-    stage('Build and Push Docker Image') {
-      environment {
-        DOCKER_IMAGE = "hiransanjeewa/config-server:${BUILD_NUMBER}"
-        // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
-        REGISTRY_CREDENTIALS = credentials('Dockerhub-Credentials')
-      }
-      steps {
-        script {
-            sh 'docker -v'
-            sh ' cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
-            def dockerImage = docker.image("${DOCKER_IMAGE}")
-            docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
-                 dockerImage.push()
+    // stage('Build and Push Docker Image') {
+    //   environment {
+    //     DOCKER_IMAGE = "hiransanjeewa/config-server:${BUILD_NUMBER}"
+    //     // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
+    //     REGISTRY_CREDENTIALS = credentials('Dockerhub-Credentials')
+    //   }
+    //   steps {
+    //     script {
+    //         sh 'docker -v'
+    //         sh ' cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
+    //         def dockerImage = docker.image("${DOCKER_IMAGE}")
+    //         docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
+    //              dockerImage.push()
             
             
-            }
+    //         }
           
-           // sh 'mkdir deployment-manifests && cd deployment-manifests'
-        }
-      }
-     }
+    //        // sh 'mkdir deployment-manifests && cd deployment-manifests'
+    //     }
+    //   }
+    //  }
 
     stage('Checkout K8S manifest SCM') {
         steps {
             sh '''
                cd ../
+               ls
+               pwd
+
             '''
             git credentialsId: 'Github-Credentials', 
                 url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
-                branch: 'main'           
+                branch: 'main'
+            sh '''
+               
+               ls
+               pwd
+
+            '''
+            
             }
             
     }
@@ -82,15 +92,22 @@ pipeline {
                     git config --global user.email "hiransanjeewaa@gmail.com"
                     git config --global user.name "Hiransanjeewa"
                     cd deployments
+                    ls
+                    pwd
+                    
+                    
                     chmod +rwx config-server-service.yaml
                     sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml
                     cat config-server-service.yaml
                     cd ../
                     git config --global --add safe.directory /var/lib/jenkins/workspace/Microservices-Backend
+                    git status
                     git add .
                     git commit -m 'config-server-service.yaml | Jenkins Pipeline'
                     git remote -v
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+
+
 
                    '''
             }

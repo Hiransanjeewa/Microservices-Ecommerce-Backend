@@ -63,61 +63,61 @@ pipeline {
     //   }
     //  }
 
-  //   stage('Checkout K8S manifest SCM') {
-  //       steps {
-  //           sh '''
-  //              cd ../
-  //              ls
-  //              pwd
+    stage('Checkout K8S manifest SCM') {
+        steps {
+            sh '''
+               cd ../
+               ls
+               pwd
 
-  //           '''
-  //           git credentialsId: 'Github-Credentials', 
-  //               url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
-  //               branch: 'main'
-  //           sh '''
+            '''
+            git credentialsId: 'Github-Credentials', 
+                url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
+                branch: 'main'
+            sh '''
                
-  //              ls
-  //              pwd
+               ls
+               pwd
 
-  //           '''
+            '''
             
-  //           }
+            }
             
-  //   }
+    }
     
-  //   stage('Update Deployment File') {
-  //       environment {
-  //           GIT_REPO_NAME = "Microservices-Backend-Manifests"
-  //           GIT_USER_NAME = "Hiransanjeewa"
-  //       }
-  //       steps {
-  //           withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-  //               sh '''
+    stage('Update Deployment File') {
+        environment {
+            GIT_REPO_NAME = "Microservices-Backend-Manifests"
+            GIT_USER_NAME = "Hiransanjeewa"
+        }
+        steps {
+            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                sh '''
 
-  //                   git config --global user.email "hiransanjeewaa@gmail.com"
-  //                   git config --global user.name "Hiransanjeewa"
-  //                   cd deployments
-  //                   ls
-  //                   pwd
+                    git config --global user.email "hiransanjeewaa@gmail.com"
+                    git config --global user.name "Hiransanjeewa"
+                    cd deployments
+                    ls
+                    pwd
                     
                     
-  //                   chmod +rwx config-server-service.yaml
-  //                   sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml
-  //                   cat config-server-service.yaml
-  //                   cd ../
-  //                   git config --global --add safe.directory /var/lib/jenkins/workspace/Microservices-Backend
-  //                   git status
-  //                   git add deployments
-  //                   git commit -m 'config-server-service.yaml | Jenkins Pipeline'
-  //                   git remote -v
-  //                   git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                    chmod +rwx config-server-service.yaml
+                    sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml
+                    cat config-server-service.yaml
+                    cd ../
+                    git config --global --add safe.directory /var/lib/jenkins/workspace/Microservices-Backend
+                    git status
+                    git add deployments
+                    git commit -m 'config-server-service.yaml | Jenkins Pipeline'
+                    git remote -v
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
 
 
 
-  //                  '''
-  //           }
-  //       }
-  //   }
+                   '''
+            }
+        }
+    }
     
    }
   post {

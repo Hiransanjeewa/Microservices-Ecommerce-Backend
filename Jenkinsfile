@@ -70,6 +70,12 @@ pipeline {
                 url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
                 branch: 'main'
             }
+            sh '''
+               cd ../
+               ls
+               pwd
+
+            '''
     }
     
     stage('Update Deployment File') {

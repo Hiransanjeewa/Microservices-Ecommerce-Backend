@@ -82,6 +82,7 @@ pipeline {
                     sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml
                     cat config-server-service.yaml
                     cd ../
+                    git config --global --add safe.directory /var/lib/jenkins/workspace/Microservices-Backend
                     git status
                     git add .
                     git commit -m 'config-server-service.yaml | Jenkins Pipeline'

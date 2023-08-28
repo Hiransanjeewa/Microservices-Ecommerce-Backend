@@ -60,6 +60,10 @@ pipeline {
 
     stage('Checkout K8S manifest SCM') {
         steps {
+            sh '''
+               cd..
+
+            '''
             git credentialsId: 'Github-Credentials', 
                 url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
                 branch: 'main'
@@ -78,7 +82,8 @@ pipeline {
                     
                     ls
                     pwd
-                
+                    
+                    
                     chmod +rwx config-server-service.yaml
                     sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml
                     cat config-server-service.yaml

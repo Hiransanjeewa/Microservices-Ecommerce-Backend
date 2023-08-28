@@ -105,13 +105,20 @@ pipeline {
                     git config --global user.email "hiransanjeewaa@gmail.com"
                     git config --global user.name "Hiransanjeewa"
                     cd ConfigServer
+                    ls
                     cd ../
-                    cd deployments                   
+                    cd deployments
+                    ls -ltr
+                    
+                    pwd
+                    
+                    
                     chmod +rwx config-server-service.yaml
                     sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml
                     cat config-server-service.yaml
                     cd ../
                     git config --global --add safe.directory /var/lib/jenkins/workspace/Microservices-Backend
+                    git status
                     git add deployments
                     git commit -m 'config-server-service.yaml | Jenkins Pipeline'
                     git remote -v

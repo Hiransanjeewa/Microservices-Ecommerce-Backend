@@ -47,7 +47,7 @@ pipeline {
       steps {
         script {
            
-            def microservices = ['config-server', 'service-registry', 'login-server', 'register-service', 'api-gateway']  // Add your microservice names here
+            def microservices = ['config-server', 'service-registry', 'login-service', 'register-service', 'api-gateway']  // Add your microservice names here
 
             docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
                 // dockerImage.push()

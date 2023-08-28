@@ -62,20 +62,10 @@ pipeline {
         steps {
             sh '''
                cd ../
-               ls
-               pwd
-
             '''
             git credentialsId: 'Github-Credentials', 
                 url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
-                branch: 'main'
-            sh '''
-               
-               ls
-               pwd
-
-            '''
-            
+                branch: 'main'           
             }
             
     }
@@ -92,22 +82,15 @@ pipeline {
                     git config --global user.email "hiransanjeewaa@gmail.com"
                     git config --global user.name "Hiransanjeewa"
                     cd deployments
-                    ls
-                    pwd
-                    
-                    
                     chmod +rwx config-server-service.yaml
                     sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml
                     cat config-server-service.yaml
                     cd ../
                     git config --global --add safe.directory /var/lib/jenkins/workspace/Microservices-Backend
-                    git status
                     git add .
                     git commit -m 'config-server-service.yaml | Jenkins Pipeline'
                     git remote -v
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
-
-
 
                    '''
             }

@@ -9,15 +9,10 @@ pipeline {
   }
 
   stages {
-    stage('Clean Workspace') {
-      steps {
-        // Clean up the workspace before each stage
-        deleteDir()
-      }
-    }
 
     stage('Checkout') {
       steps {
+        deleteDir()
         sh 'echo passed'
         git branch: 'main', url: 'https://github.com/Hiransanjeewa/Microservices-Ecommerce-Backend.git'
       }

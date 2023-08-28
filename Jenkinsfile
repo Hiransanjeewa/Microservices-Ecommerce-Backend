@@ -69,13 +69,15 @@ pipeline {
             git credentialsId: 'Github-Credentials', 
                 url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
                 branch: 'main'
-            }
             sh '''
                
                ls
                pwd
 
             '''
+            
+            }
+            
     }
     
     stage('Update Deployment File') {

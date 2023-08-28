@@ -26,7 +26,7 @@ pipeline {
                     for (def service in microservices) {
                         stage("Build and Test - ${service}") {
                             // Your stage steps go here
-                            sh 'cd ${service} && mvn clean package'
+                            sh "cd ${service} && mvn clean package"
                         }
                     }
                 }

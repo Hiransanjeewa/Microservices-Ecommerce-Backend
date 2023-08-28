@@ -71,7 +71,7 @@ pipeline {
                 branch: 'main'
             }
             sh '''
-               cd ../
+               
                ls
                pwd
 

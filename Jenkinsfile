@@ -36,27 +36,27 @@ pipeline {
        }
       }
 
-    // stage('Build and Push Docker Image') {
-    //   environment {
-    //     DOCKER_IMAGE = "hiransanjeewa/config-server:${BUILD_NUMBER}"
-    //     // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
-    //     REGISTRY_CREDENTIALS = credentials('Dockerhub-Credentials')
-    //   }
-    //   steps {
-    //     script {
-    //         sh 'docker -v'
-    //         sh ' cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
-    //         def dockerImage = docker.image("${DOCKER_IMAGE}")
-    //         docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
-    //              dockerImage.push()
+    stage('Build and Push Docker Image') {
+      environment {
+        DOCKER_IMAGE = "hiransanjeewa/config-server:${BUILD_NUMBER}"
+        // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
+        REGISTRY_CREDENTIALS = credentials('Dockerhub-Credentials')
+      }
+      steps {
+        script {
+            sh 'docker -v'
+            sh ' cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
+            def dockerImage = docker.image("${DOCKER_IMAGE}")
+            docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
+                 dockerImage.push()
             
             
-    //         }
+            }
           
-    //        // sh 'mkdir deployment-manifests && cd deployment-manifests'
-    //     }
-    //   }
-    //  }
+           // sh 'mkdir deployment-manifests && cd deployment-manifests'
+        }
+      }
+     }
 
     stage('Checkout K8S manifest SCM') {
         steps {

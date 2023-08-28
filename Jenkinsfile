@@ -22,7 +22,7 @@ pipeline {
          sh 'ls -ltr'
          // build the project and create a JAR file
 
-         sh 'cd ConfigServer && mvn clean package'
+         sh 'cd config-server && mvn clean package'
 
        }
      }

@@ -24,16 +24,16 @@ pipeline {
          // build the project and create a JAR file
 
          sh 'cd ConfigServer && mvn clean package'
-         sh 'cd ../'
+         
          sh 'ls'
          sh 'pwd'
 
        }
-       post {
-         always {
-            cleanWs() // Clean the workspace after this stage
-         }
-       }
+      //  post {
+      //    always {
+      //       cleanWs() // Clean the workspace after this stage
+      //    }
+      //  }
      }
     //  stage('Static Code Analysis') {
     //    environment {
@@ -103,6 +103,9 @@ pipeline {
 
                     git config --global user.email "hiransanjeewaa@gmail.com"
                     git config --global user.name "Hiransanjeewa"
+                    cd ConfigServer
+                    ls
+                    cd ../
                     cd deployments
                     ls -ltr
                     

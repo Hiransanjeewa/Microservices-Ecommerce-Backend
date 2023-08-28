@@ -79,7 +79,7 @@ pipeline {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
 
-                    
+                    cd ../
                     ls
                     pwd
                     

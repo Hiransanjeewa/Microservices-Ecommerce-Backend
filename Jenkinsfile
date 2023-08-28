@@ -75,6 +75,7 @@ pipeline {
            
                ls
                pwd
+               chmod -R g+w ConfigServer
               
 
             '''

@@ -24,6 +24,7 @@ pipeline {
                     def microservices = ['config-server', 'service-registry', 'login-service', 'register-service', 'api-gateway']  // Add your microservice names here
                     
                     for (def service in microservices) {
+                      parallel {
                         stage("Build and Test - ${service}") {
                             // Your stage steps go here
                             sh "cd ${service} && mvn clean package"
@@ -39,6 +40,7 @@ pipeline {
                             }
                           }
                         }
+                      }
 
                     }
                 }
@@ -96,9 +98,6 @@ pipeline {
   //       steps {
   //           sh '''
            
-
-         
-              
 
   //           '''
   //           git credentialsId: 'Github-Credentials', 

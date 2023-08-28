@@ -89,6 +89,8 @@ pipeline {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
 
+                    git config --global user.email "hiransanjeewaa@gmail.com"
+                    git config --global user.name "Hiransanjeewa"
                     cd deployments
                     ls
                     pwd

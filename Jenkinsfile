@@ -9,6 +9,11 @@ pipeline {
   }
 
   stages {
+    stage('Clear Workspace') {
+      steps {
+        clean(workspace: true) // Clean the workspace
+      }
+    }
     stage('Checkout') {
       steps {
         sh 'echo passed'

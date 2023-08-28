@@ -66,7 +66,7 @@ pipeline {
     stage('Checkout K8S manifest SCM') {
         steps {
             sh '''
-               cd ../
+           
                ls
                pwd
               

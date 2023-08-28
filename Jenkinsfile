@@ -16,14 +16,14 @@ pipeline {
         git branch: 'main', url: 'https://github.com/Hiransanjeewa/Microservices-Ecommerce-Backend.git'
       }
      }
-    //  stage('Build and Test') {
-    //    steps {
-    //      sh 'ls -ltr'
-    //      // build the project and create a JAR file
+     stage('Build and Test') {
+       steps {
+         sh 'ls -ltr'
+         // build the project and create a JAR file
 
-    //      sh 'cd ConfigServer && mvn clean package'
-    //    }
-    //    }
+         sh 'cd ConfigServer && mvn clean package'
+       }
+       }
     //  stage('Static Code Analysis') {
     //    environment {
     //      SONAR_URL = "http://34.133.164.237:9000"

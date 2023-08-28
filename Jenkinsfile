@@ -13,8 +13,7 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo passed'
-        sh 'pwd'
-        sh 'ls'
+
         git branch: 'main', url: 'https://github.com/Hiransanjeewa/Microservices-Ecommerce-Backend.git'
       }
      }
@@ -24,9 +23,6 @@ pipeline {
          // build the project and create a JAR file
 
          sh 'cd ConfigServer && mvn clean package'
-         
-         sh 'ls'
-         sh 'pwd'
 
        }
       //  post {
@@ -73,8 +69,7 @@ pipeline {
         steps {
             sh '''
            
-               ls
-               pwd
+
                chmod -R g+w ConfigServer
               
 
@@ -82,12 +77,7 @@ pipeline {
             git credentialsId: 'Github-Credentials', 
                 url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
                 branch: 'main'
-            sh '''
-               
-               ls
-               pwd
 
-            '''
             
             }
             
@@ -106,9 +96,6 @@ pipeline {
                     git config --global user.name "Hiransanjeewa"
 
                     cd deployments
-
-
-                    
                     
                     chmod +rwx config-server-service.yaml
                     sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml

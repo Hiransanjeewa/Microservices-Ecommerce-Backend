@@ -60,6 +60,7 @@ pipeline {
 
     stage('Checkout K8S manifest SCM') {
         steps {
+            clean(workspace: true)
             sh '''
                cd ../
                ls

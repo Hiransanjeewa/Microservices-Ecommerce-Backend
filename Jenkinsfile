@@ -69,6 +69,7 @@ pipeline {
                cd ../
                ls
                pwd
+               mkdir deploy && cd deploy
 
             '''
             git credentialsId: 'Github-Credentials', 

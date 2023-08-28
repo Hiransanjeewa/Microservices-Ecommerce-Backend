@@ -52,10 +52,9 @@ pipeline {
             docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
                 // dockerImage.push()
               for (def serviceName in microservices) {
-                def workspaceDir = "/var/lib/jenkins/workspace/Microservices Backend"
-                def serviceDir = "${workspaceDir}/${serviceName}"
-                        
-                sh "cd ${serviceDir} && mvn package dockerfile:push"
+                   
+                sh "cd ${serviceName} && mvn package dockerfile:push"
+                sh 'cd ../'
               }
             
             }

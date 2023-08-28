@@ -18,7 +18,7 @@ pipeline {
       }
      }
 
-     stage('Loop') {
+     stage('Build and Testing Loop') {
             steps {
                 script {
                     def microservices = ['config-server', 'service-registry', 'login-service', 'register-service', 'api-gateway']  // Add your microservice names here
@@ -28,8 +28,21 @@ pipeline {
                             // Your stage steps go here
                             sh "cd ${service} && mvn clean package"
                         }
+                        stage("Static Code Analysis - - ${service}") {
+                          environment {
+                            SONAR_URL = "http://34.133.164.237:9000"
+                          }
+                          steps {
+                            withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+                              
+                              sh "cd ${service} && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}"
+                            }
+                          }
+                        }
+
                     }
                 }
+
             }
         }
 
@@ -43,17 +56,17 @@ pipeline {
 
   //      }
   //    }
-  //   //  stage('Static Code Analysis') {
-  //   //    environment {
-  //   //      SONAR_URL = "http://34.133.164.237:9000"
-  //   //    }
-  //   //    steps {
-  //   //      withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-  //   //        sh 'ls -ltr'
-  //   //        sh 'cd ConfigServer && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-  //   //      }
-  //   //    }
-  //   //   }
+    //  stage('Static Code Analysis') {
+    //    environment {
+    //      SONAR_URL = "http://34.133.164.237:9000"
+    //    }
+    //    steps {
+    //      withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+    //        sh 'ls -ltr'
+    //        sh 'cd ConfigServer && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+    //      }
+    //    }
+    //   }
 
   //   stage('Build and Push Docker Image') {
   //     environment {

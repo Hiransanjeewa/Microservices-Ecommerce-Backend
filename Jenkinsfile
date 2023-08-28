@@ -62,6 +62,8 @@ pipeline {
         steps {
             sh '''
                cd ../
+               ls
+               pwd
 
             '''
             git credentialsId: 'Github-Credentials', 

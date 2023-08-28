@@ -104,7 +104,8 @@ pipeline {
                     git config --global user.email "hiransanjeewaa@gmail.com"
                     git config --global user.name "Hiransanjeewa"
                     cd deployments
-                    ls
+                    ls -ltr
+                    
                     pwd
                     
                     

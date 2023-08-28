@@ -9,12 +9,7 @@ pipeline {
   }
 
   stages {
-    stage('Clean Workspace') {
-      steps {
-        // Clean up the workspace before each stage
-        deleteDir()
-      }
-    }
+
 
     stage('Checkout') {
       steps {

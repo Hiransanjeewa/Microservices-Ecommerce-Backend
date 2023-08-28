@@ -46,13 +46,17 @@ pipeline {
       }
       steps {
         script {
-            sh 'docker -v'
+           
+            def microservices = ['config-server', 'service-registry', 'Service3']  // Add your microservice names here
 
-            // sh ' cd ConfigServer && docker build -t ${DOCKER_IMAGE} .'
-            def dockerImage = docker.image("${DOCKER_IMAGE}")
             docker.withRegistry('https://index.docker.io/v1/', "Dockerhub-Credentials") {
                 // dockerImage.push()
-                sh 'cd ConfigServer && mvn package dockerfile:push'
+              for (def serviceName in microservices) {
+                def workspaceDir = "/var/lib/jenkins/workspace/Microservices"
+                def serviceDir = "${workspaceDir}/${serviceName}"
+                        
+                sh "cd ${serviceDir} && mvn package dockerfile:push"
+              }
             
             
             }

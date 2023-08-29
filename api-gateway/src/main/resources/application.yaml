@@ -1,39 +1,28 @@
 server:
-  port: 8060
-
-management:
-  tracing:
-    sampling:
-      probability: 1.0
+  port: 9191
 
 spring:
   application:
-    name: api-gateway
-  config:
-    import: "optional:configserver:http://localhost:8081"
-
+    name: spi-gateway
   cloud:
     gateway:
       routes:
-        - id: register-service
+        - id: login-service
           uri: lb://register-service
           predicates:
-            - Path=/ecommerce/register/**
-
+            - Path=/ecommerce/register/register/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: register-service
+#                fallbackuri: forward:/registerServiceFallBack
         - id: login-service
           uri: lb://login-service
           predicates:
             - Path=/login/**
-
-
-eureka:
-  instance:
-    preferIpAddress: true
-    hostname: eureka-0
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
-
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: DEPARTMENT-SERVICE
+#                fallbackuri: forward:/departmentServiceFallBack
 

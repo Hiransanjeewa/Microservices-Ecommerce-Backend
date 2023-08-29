@@ -17,7 +17,7 @@ public class LoginController {
     LoginServices loginServices = new LoginServicesImpl();
 
 
-    @PostMapping("/")
+    @PostMapping("/login")
     public String loginWithCredentials(@RequestBody LoginUser loginuser) throws UnsupportedEncodingException {
 
 
@@ -30,7 +30,6 @@ public class LoginController {
         }else {
             return "Email or password incorrect";
         }
-
 
     }
     @GetMapping("/test")

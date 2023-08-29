@@ -35,7 +35,9 @@ public class LoginController {
         }
 
 
-
+    }
+    @GetMapping("/")
+    public String loginWithCredentials() throws UnsupportedEncodingException {
     }
 
 

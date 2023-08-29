@@ -7,10 +7,10 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: login-service
+        - id: register-service
           uri: lb://register-service
           predicates:
-            - Path=/ecommerce/register/register/**
+            - Path=/ecommerce/**
 #          filters:
 #            - name: CircuitBreaker
 #              args:

@@ -11,7 +11,7 @@ import java.io.UnsupportedEncodingException;
 
 
 @RestController
-@RequestMapping("/ecommerce/register")
+@RequestMapping("/ecommerce")
 public class RegisterUserController {
 
 

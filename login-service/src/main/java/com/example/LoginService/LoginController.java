@@ -34,6 +34,7 @@ public class LoginController {
     }
     @GetMapping("/test")
     public String loginWithCredentials() throws UnsupportedEncodingException {
+        System.out.println("Request received");
     return "You are connected";
     }
 

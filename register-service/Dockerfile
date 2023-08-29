@@ -1,5 +1,5 @@
 FROM openjdk:17
-ARG JAR_FILE=target/RegisterService-0.0.1.jar
+ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} register-service.jar
 ENTRYPOINT ["java","-jar","/register-service.jar"]
-EXPOSE 8085
+EXPOSE 9002

@@ -60,7 +60,7 @@ pipeline {
   //    }
     //  stage('Static Code Analysis') {
     //    environment {
-    //      SONAR_URL = "http://34.133.164.237:9000"
+    //      SONAR_URL = "http://35.133.164.124:9000"
     //    }
     //    steps {
     //      withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {

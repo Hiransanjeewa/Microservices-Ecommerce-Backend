@@ -94,52 +94,52 @@ pipeline {
       }
      }
 
-    stage('Checkout K8S manifest SCM') {
-        steps {
-            sh '''
+    // stage('Checkout K8S manifest SCM') {
+    //     steps {
+    //         sh '''
            
 
-            '''
-            git credentialsId: 'Github-Credentials', 
-                url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
-                branch: 'main'
+    //         '''
+    //         git credentialsId: 'Github-Credentials', 
+    //             url: 'https://github.com/Hiransanjeewa/Microservices-Backend-Manifests.git',
+    //             branch: 'main'
 
             
-            }
+    //         }
             
-    }
+    // }
     
-    stage('Update Deployment File') {
-        environment {
-            GIT_REPO_NAME = "Microservices-Backend-Manifests"
-            GIT_USER_NAME = "Hiransanjeewa"
-        }
-        steps {
-            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-                sh '''
+    // stage('Update Deployment File') {
+    //     environment {
+    //         GIT_REPO_NAME = "Microservices-Backend-Manifests"
+    //         GIT_USER_NAME = "Hiransanjeewa"
+    //     }
+    //     steps {
+    //         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+    //             sh '''
 
-                    git config --global user.email "hiransanjeewaa@gmail.com"
-                    git config --global user.name "Hiransanjeewa"
+    //                 git config --global user.email "hiransanjeewaa@gmail.com"
+    //                 git config --global user.name "Hiransanjeewa"
 
-                    cd deployments
+    //                 cd deployments
                     
-                    chmod +rwx config-server-service.yaml
-                    sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml
-                    cat config-server-service.yaml
-                    cd ../
-                    git config --global --add safe.directory /var/lib/jenkins/workspace/Microservices-Backend
+    //                 chmod +rwx config-server-service.yaml
+    //                 sed -i "s/config-server:[0-9]*/config-server:${BUILD_NUMBER}/g" config-server-service.yaml
+    //                 cat config-server-service.yaml
+    //                 cd ../
+    //                 git config --global --add safe.directory /var/lib/jenkins/workspace/Microservices-Backend
 
-                    git add deployments
-                    git commit -m 'config-server-service.yaml | Jenkins Pipeline'
-                    git remote -v
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+    //                 git add deployments
+    //                 git commit -m 'config-server-service.yaml | Jenkins Pipeline'
+    //                 git remote -v
+    //                 git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
 
 
 
-                   '''
-            }
-        }
-    }
+    //                '''
+    //         }
+    //     }
+    // }
     
     }
   post {

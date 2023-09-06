@@ -16,7 +16,7 @@ public class LoginServicesImpl implements LoginServices{
 
 
     @Autowired
-    private RegisterServiceClient registerServiceWebClient ;
+    private RegisterServiceClient registerServiceWebClient;
 
     @Override
     public String createSessionId(int userid) {

@@ -1,8 +1,10 @@
 package com.example.LoginService;
 
 
+import com.example.LoginService.client.RegisterServiceClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
@@ -16,20 +18,27 @@ public class LoginController {
 
     LoginServices loginServices = new LoginServicesImpl();
 
+    @Autowired
+    private RegisterServiceClient registerServiceWebClient;
+
+
 
     @PostMapping("/login")
     public String loginWithCredentials(@RequestBody LoginUser loginuser) throws UnsupportedEncodingException {
 
+        LoginUser loginUser =new LoginUser("hiransanjeewaa@gmail.com","hiran12345");
+     int a=    registerServiceWebClient.ValidateUserWithEmail(loginUser);
+        System.out.println(a);
 
+       // logger.info("login user account: email={}", loginuser.getEmail());
 
-        logger.info("login user account: email={}", loginuser.getEmail());
-
-        int validatedId = loginServices.validateCredentials(loginuser);
-        if ( validatedId !=0){
-            return loginServices.createSessionId(validatedId);
-        }else {
-            return "Email or password incorrect";
-        }
+        //int validatedId = loginServices.validateCredentials(loginuser);
+//        if ( validatedId !=0){
+//            return loginServices.createSessionId(validatedId);
+//        }else {
+//            return "Email or password incorrect";
+//        }
+        return "Controller runs successfully";
 
     }
     @GetMapping("/test")

@@ -19,7 +19,7 @@ public class RegisterUserController {
     @Autowired
     private  UserServices userServices;
 
-    Logger logger = LoggerFactory.getLogger(getClass());
+   // Logger logger = LoggerFactory.getLogger(getClass());
 
 
 
@@ -28,7 +28,7 @@ public class RegisterUserController {
         System.out.println("Request received");
        // String email=users.getEmail()
 
-        logger.info("creating user account: email={}", users.getEmail());
+   //     logger.info("creating user account: email={}", users.getEmail());
 
 //        Logger.info("creating user account : email={}",users.getEmail());
 
@@ -40,7 +40,7 @@ public class RegisterUserController {
     public int ValidateUserWithUsername(@RequestBody String username,String password) throws UnsupportedEncodingException {
 //      System.out.println("Request received");
 
-        logger.info("validated login credentials : username={}",username);
+       // logger.info("validated login credentials : username={}",username);
 
         var response = userServices.ValidateUserByUsername(username, password);
         return response;
@@ -49,10 +49,16 @@ public class RegisterUserController {
     @PostMapping(path = "/loginwithemail")
     public int ValidateUserWithEmail(@RequestBody User user) throws UnsupportedEncodingException {
 //        System.out.println("Request received");
-        logger.info("validated login credentials : email={}",user.email);
+   //     logger.info("validated login credentials : email={}",user.email);
 
         var response = userServices.ValidateUserByEmail(user.email, user.password);
         return response;
+    }
+
+    @GetMapping("/test")
+    public String test() throws UnsupportedEncodingException {
+        System.out.println("Request received to registers");
+        return "You are connected to registers";
     }
 
 

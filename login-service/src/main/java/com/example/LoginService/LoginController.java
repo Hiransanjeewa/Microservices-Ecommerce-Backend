@@ -2,6 +2,7 @@ package com.example.LoginService;
 
 
 import com.example.LoginService.client.RegisterServiceClient;
+import com.example.LoginService.client.TestingClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,17 @@ public class LoginController {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-
+    @Autowired
     LoginServices loginServices = new LoginServicesImpl();
 
     @Autowired
     private RegisterServiceClient registerServiceWebClient;
+
+    @Autowired
+    private TestingClient testingClient;
+
+
+
 
 
 
@@ -43,6 +50,7 @@ public class LoginController {
     }
     @GetMapping("/test")
     public String loginWithCredentials() throws UnsupportedEncodingException {
+        System.out.println(testingClient.test());
         System.out.println("Request received");
     return "You are connected";
     }

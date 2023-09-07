@@ -1,6 +1,6 @@
 package com.example.LoginService;
 
-import com.example.shared.LoginUser3;
+
 
 
 import com.example.LoginService.client.RegisterServiceClient;

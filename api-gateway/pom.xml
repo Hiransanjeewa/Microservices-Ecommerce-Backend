@@ -54,9 +54,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>body-parser</artifactId>
+            <version>1.20.0</version>
+        </dependency>
 
 
-	</dependencies>
+    </dependencies>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

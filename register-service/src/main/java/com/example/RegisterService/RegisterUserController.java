@@ -56,9 +56,15 @@ public class RegisterUserController {
     }
 
     @PostMapping("/test")
-    public String test() throws UnsupportedEncodingException {
+    public int test(User user1) throws UnsupportedEncodingException {
+        System.out.println(user1.email);
         System.out.println("Request received to registers");
-        return "You are connected to registers";
+        User user = new User();
+        user.email="hiransanjeewa.gmail.com";
+        user.password="hiransanjeewa";
+        int response= userServices.ValidateUserByEmail(user.email,user.password);
+        return response;
+
     }
 
 

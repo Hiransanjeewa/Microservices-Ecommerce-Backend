@@ -8,5 +8,5 @@ public interface LoginServices {
 
     String validateCredentials(LoginUser loginUser) throws UnsupportedEncodingException;
 
-    String testing();
+    String testing(LoginUser loginUser);
 }

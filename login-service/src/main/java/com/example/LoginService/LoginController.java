@@ -33,11 +33,16 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public String loginWithCredentials(@RequestBody LoginUser loginuser) throws UnsupportedEncodingException {
+    public String loginWithCredentials(@RequestBody LoginUser loginUser) throws UnsupportedEncodingException {
 
-        LoginUser loginUser =new LoginUser("hiransanjeewaa@gmail.com","hiran12345");
-     int a=    registerServiceWebClient.ValidateUserWithEmail(loginUser);
-        System.out.println(a);
+
+
+        return loginServices.testing(loginUser);
+
+
+//        LoginUser loginUser =new LoginUser("hiransanjeewaa@gmail.com","hiran12345");
+//     int a=    registerServiceWebClient.ValidateUserWithEmail(loginUser);
+//        System.out.println(a);
 
        // logger.info("login user account: email={}", loginuser.getEmail());
 
@@ -47,16 +52,15 @@ public class LoginController {
 //        }else {
 //            return "Email or password incorrect";
 //        }
-        return "Controller runs successfully";
+       // return "Controller runs successfully";
 
     }
     @GetMapping("/test")
     public String loginWithCredentials() throws UnsupportedEncodingException {
-//        System.out.println("Request received");
-//        System.out.println(testingClient.test());
 
 
-    return loginServices.testing();
+   // return loginServices.testing(loginUser);
+        return "test";
     }
 
 

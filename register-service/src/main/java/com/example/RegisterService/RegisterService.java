@@ -24,11 +24,11 @@ public class RegisterService implements UserServices{
 
     @Override
     public int ValidateUserByEmail(String email, String password) {
-        System.out.println(email);
-        System.out.println(password);
+      //  System.out.println(email);
+     //   System.out.println(password);
         int userid= userRepo.ValidateUsersByEmail(email,password);
        // int userid= 1;
-        System.out.println(userid);
+      //  System.out.println(userid);
         if (userid>0){
             return userid;
         }else {

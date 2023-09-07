@@ -47,8 +47,10 @@ public class LoginServicesImpl implements LoginServices{
     }
 
     @Override
-    public String testing() {
-        LoginUser loginUser =new LoginUser("hiransanjeewa@gmail.com" , "hiran12345");
-        return testingClient.test(loginUser);
+    public String testing(LoginUser loginUser) {
+
+        System.out.println(loginUser.getEmail());
+        System.out.println(loginUser.getPassword());
+        return testingClient.ValidateUserWithEmail(loginUser);
     }
 }

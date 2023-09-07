@@ -13,7 +13,7 @@ import org.springframework.web.service.annotation.PostExchange;
 @HttpExchange
 public interface TestingClient{
 
-    @PostExchange("/ecommerce/test")
-    public String test(@RequestBody LoginUser loginUser) ;
+    @PostExchange("/ecommerce/loginwithemail")
+    public String ValidateUserWithEmail(@RequestBody  LoginUser loginUser) ;
 
 }

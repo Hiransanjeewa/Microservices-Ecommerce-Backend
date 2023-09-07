@@ -1,6 +1,7 @@
 package com.example.RegisterService;
 
 
+import com.example.LoginService.LoginUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +48,13 @@ public class RegisterUserController {
     }
 
     @PostMapping(path = "/loginwithemail")
-    public int ValidateUserWithEmail(@RequestBody User user) throws UnsupportedEncodingException {
+    public int ValidateUserWithEmail(@RequestBody LoginUser loginUser) throws UnsupportedEncodingException {
 //        System.out.println("Request received");
    //     logger.info("validated login credentials : email={}",user.email);
 
-        var response = userServices.ValidateUserByEmail(user.email, user.password);
+        System.out.println(loginUser.getEmail());
+
+        var response = userServices.ValidateUserByEmail(loginUser.getEmail(),loginUser.getPassword());
         return response;
     }
 
@@ -60,9 +63,9 @@ public class RegisterUserController {
         System.out.println(user1.email);
         System.out.println("Request received to registers");
         User user = new User();
-        user.email="hiransanjeewa.gmail.com";
-        user.password="hiransanjeewa";
-        int response= userServices.ValidateUserByEmail(user.email,user.password);
+//        user.email="hiransanjeewa.gmail.com";
+//        user.password="hiransanjeewa";
+        int response= userServices.ValidateUserByEmail(user1.email,user1.password);
         return response;
 
     }

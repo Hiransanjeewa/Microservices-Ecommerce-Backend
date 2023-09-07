@@ -1,0 +1,4 @@
+common:
+  LoginUser2:
+    username: john.doe
+    password: secret

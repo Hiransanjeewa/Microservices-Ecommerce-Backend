@@ -2,6 +2,7 @@ package com.example.LoginService;
 
 
 import com.example.LoginService.client.RegisterServiceClient;
+import com.example.LoginService.client.TestingClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ public class LoginServicesImpl implements LoginServices{
     @Autowired
     private  LoginRepo loginRepo;
 
+    @Autowired
+    private TestingClient testingClient;
 
     @Autowired
     private RegisterServiceClient registerServiceWebClient;
@@ -38,7 +41,13 @@ public class LoginServicesImpl implements LoginServices{
         return sessionKey.toString();
     }
     @Override
-    public int validateCredentials(LoginUser loginUser) throws UnsupportedEncodingException {
-        return registerServiceWebClient.ValidateUserWithEmail(loginUser);
+    public String validateCredentials(LoginUser loginUser) throws UnsupportedEncodingException {
+      //  return registerServiceWebClient.ValidateUserWithEmail(loginUser);
+        return "dfsfs";
+    }
+
+    @Override
+    public String testing() {
+        return testingClient.test();
     }
 }

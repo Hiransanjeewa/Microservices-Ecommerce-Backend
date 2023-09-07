@@ -17,13 +17,15 @@ public class LoginController {
     Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    LoginServices loginServices = new LoginServicesImpl();
+    private LoginServices loginServices ;//= new LoginServicesImpl();
 
     @Autowired
     private RegisterServiceClient registerServiceWebClient;
 
     @Autowired
     private TestingClient testingClient;
+
+
 
 
 
@@ -50,9 +52,11 @@ public class LoginController {
     }
     @GetMapping("/test")
     public String loginWithCredentials() throws UnsupportedEncodingException {
-        System.out.println(testingClient.test());
-        System.out.println("Request received");
-    return "You are connected";
+//        System.out.println("Request received");
+//        System.out.println(testingClient.test());
+
+
+    return loginServices.testing();
     }
 
 

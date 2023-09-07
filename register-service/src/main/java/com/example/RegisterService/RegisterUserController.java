@@ -55,7 +55,7 @@ public class RegisterUserController {
         return response;
     }
 
-    @GetMapping("/test")
+    @PostMapping("/test")
     public String test() throws UnsupportedEncodingException {
         System.out.println("Request received to registers");
         return "You are connected to registers";

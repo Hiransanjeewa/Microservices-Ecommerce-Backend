@@ -17,8 +17,10 @@ public interface RegisterServiceClient {
 //    @PostExchange("/ecommerce/loginwithusername")
 //    public int ValidateUserWithUsername(@RequestBody String username, String password) throws UnsupportedEncodingException;
 
-    @PostExchange("/ecommerce/loginwithemail")
-    public int ValidateUserWithEmail(LoginUser user) throws UnsupportedEncodingException ;
 
+
+        @PostExchange("/ecommerce/loginwithemail")
+        public String ValidateUserWithEmail(@RequestBody LoginUser loginUser);
 
     }
+

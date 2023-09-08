@@ -39,21 +39,13 @@ public class RegisterUserController {
 
     @PostMapping(path = "/loginwithusername")
     public int ValidateUserWithUsername(@RequestBody String username,String password) throws UnsupportedEncodingException {
-//      System.out.println("Request received");
-
-       // logger.info("validated login credentials : username={}",username);
-
         var response = userServices.ValidateUserByUsername(username, password);
         return response;
     }
 
     @PostMapping(path = "/loginwithemail")
     public int ValidateUserWithEmail(@RequestBody LoginUser loginUser) throws UnsupportedEncodingException {
-//        System.out.println("Request received");
-   //     logger.info("validated login credentials : email={}",user.email);
-
-        System.out.println(loginUser.getEmail());
-
+       // System.out.println(loginUser.getEmail());
         var response = userServices.ValidateUserByEmail(loginUser.getEmail(),loginUser.getPassword());
         return response;
     }

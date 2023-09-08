@@ -2,6 +2,7 @@ package com.example.LoginService.config;
 
 
 import com.example.LoginService.client.RegisterServiceClient;
+import com.example.LoginService.client.TestingClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.reactive.LoadBalancedExchangeFilterFunction;
 import org.springframework.context.annotation.Bean;
@@ -12,27 +13,27 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 
 
-    @Configuration
-    public class WebClientConfig {
+@Configuration
+public class WebClientConfig {
+    @Autowired
+    private LoadBalancedExchangeFilterFunction filterFunction;
 
-        @Autowired
-        private LoadBalancedExchangeFilterFunction filterFunction;
 
-
-        @Bean
-        public WebClient registerWebClient() {
-            return WebClient.builder()
-                    .baseUrl("http://register-service")
-                    .filter(filterFunction)
-                    .build();
-        }
-
-        @Bean
-        public RegisterServiceClient registerClient() {
-            HttpServiceProxyFactory httpServiceProxyFactory
-                    = HttpServiceProxyFactory
-                    .builder(WebClientAdapter.forClient(registerWebClient()))
-                    .build();
-            return httpServiceProxyFactory.createClient(RegisterServiceClient.class);
-        }
+    @Bean
+    public WebClient loginWebClient() {
+        return WebClient.builder()
+                .baseUrl("http://register-service")
+                .filter(filterFunction)
+                .build();
     }
+
+    @Bean
+    public RegisterServiceClient registerServiceClient() {
+        HttpServiceProxyFactory httpServiceProxyFactory
+                = HttpServiceProxyFactory
+                .builder(WebClientAdapter.forClient(loginWebClient()))
+                .build();
+        return httpServiceProxyFactory.createClient(RegisterServiceClient.class);
+    }
+
+}

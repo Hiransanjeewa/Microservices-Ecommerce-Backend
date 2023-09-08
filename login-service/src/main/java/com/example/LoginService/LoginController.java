@@ -8,6 +8,7 @@ import com.example.LoginService.client.TestingClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
@@ -58,11 +59,12 @@ public class LoginController {
 
     }
     @GetMapping("/test")
-    public String loginWithCredentials() throws UnsupportedEncodingException {
+    public ResponseEntity<LoginUser> getLoginUserClass() throws UnsupportedEncodingException {
 
-
+        LoginUser loginUser = new LoginUser("hiransajeewaa@gmail.com","12345");
+        return ResponseEntity.ok(loginUser);
    // return loginServices.testing(loginUser);
-        return "test";
+      //  return "test";
     }
 
 

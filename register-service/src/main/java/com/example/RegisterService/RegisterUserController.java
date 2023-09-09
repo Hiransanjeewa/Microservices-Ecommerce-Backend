@@ -2,10 +2,10 @@ package com.example.RegisterService;
 
 
 import com.example.LoginService.LoginUser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
 
@@ -20,7 +20,8 @@ public class RegisterUserController {
     @Autowired
     private  UserServices userServices;
 
-   // Logger logger = LoggerFactory.getLogger(getClass());
+
+    // Logger logger = LoggerFactory.getLogger(getClass());
 
 
 
@@ -50,17 +51,27 @@ public class RegisterUserController {
         return response;
     }
 
-    @PostMapping("/test")
-    public int test(User user1) throws UnsupportedEncodingException {
-        System.out.println(user1.email);
-        System.out.println("Request received to registers");
-        User user = new User();
-//        user.email="hiransanjeewa.gmail.com";
-//        user.password="hiransanjeewa";
-        int response= userServices.ValidateUserByEmail(user1.email,user1.password);
-        return response;
 
+
+    private UserService userService;
+
+    @PostMapping("/test")
+    public User  getUserById(Long userId) {
+
+        return userService.getLoginUserClass();
     }
+//    public int test(User user1) throws UnsupportedEncodingException {
+//        System.out.println(user1.email);
+//        System.out.println("Request received to registers");
+//        User user = new User();
+////        user.email="hiransanjeewa.gmail.com";
+////        user.password="hiransanjeewa";
+//        int response= userServices.ValidateUserByEmail(user1.email,user1.password);
+//        return response;
+
+
+
+//    }
 
 
 }

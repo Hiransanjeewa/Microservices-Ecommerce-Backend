@@ -24,7 +24,6 @@ public class RegisterUserController {
     // Logger logger = LoggerFactory.getLogger(getClass());
 
 
-
     @PostMapping(path = "/register")
     public  String saveUser(@RequestBody Users users) throws UnsupportedEncodingException {
         System.out.println("Request received");
@@ -71,6 +70,7 @@ public class RegisterUserController {
 
 
 
+    
 //    }
 
 
